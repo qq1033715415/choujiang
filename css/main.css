@@ -82,6 +82,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
 	box-shadow: 2px 2px 4px #390606 ;
 	background-color:#e91c04 !important;
 	border: 2px solid #fbc649 !important;
+	padding: 0 13px !important;
 }
 
 .tx-box-top{
@@ -124,3 +125,15 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
 	background-size: contain;
 	
 }
+
+#list{
+	width: 100px;
+}
+
+#list::-webkit-input-placeholder { /* WebKit, Blink, Edge */    color: #FFFFFF; }
+
+#list:-moz-placeholder { /* Mozilla Firefox 4 to 18 */   color: #FFFFFF; }
+
+#list::-moz-placeholder { /* Mozilla Firefox 19+ */   color: #FFFFFF; }
+
+#list:-ms-input-placeholder { /* Internet Explorer 10-11 */   color: #FFFFFF; }

@@ -29,13 +29,14 @@
 			</div>
 			<div class="tx-box">
 				<div class="tx-box-top">
-					<div class="layui-btn layui-btn-zx">规则</div>
+					<div class="layui-btn layui-btn-zx ts" data-method="notice">规则</div>
 					<button class="layui-btn layui-btn-zx" id="rq" lay-key="1" lay-date="">	</button>
+						<input required maxlength='0' id="list" placeholder="金牛支行" class="layui-btn layui-btn-zx">
 				</div>
 				<div class="tx-box-bottom">
 					<div class="layui-form">
-						<input type="text" name="title" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input form-input-xm">
-						<input type="text" name="title" required lay-verify="required" placeholder="请输入九位凭证号码" autocomplete="off" class="layui-input form-input">
+						<input type="text" id="xm" name="xm" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input form-input-xm">
+						<input type="text" id="hm" name="hm" required lay-verify="required" placeholder="请输入九位凭证号码" autocomplete="off" class="layui-input form-input">
 					</div>
 				</div>
 			</div>
@@ -76,7 +77,12 @@
 				},
 			    start: function() {
 			      // 开始游戏
-			      myLucky.play()
+			      if ($('#xm').val()=="" || $('#hm').val()==''  || $('#list').val()=='' || isNaN($('#hm').val()) || $('#xm').val().length < 2 || $('#hm').val().length != 9) {
+					  layer.msg("填写正确的姓名、凭证号并选择支行",{icon:5})
+			      	
+			      }else{
+					  myLucky.play()
+				  }
 			      // 假设接口的请求速度是1s
 			      setTimeout(() => {
 			        // 停止游戏
@@ -86,24 +92,136 @@
 			    end: function(prize) { // 游戏结束触发 end 回调
 			      layer.open({
 					  type: 0,
-					  content: '恭喜中奖: ' + prize.fonts[0].text
+					  content: '尊敬的'+$('#xm').val()+'，恭喜您在'+$('#list').val()+'中奖，'+'结果为：'+ prize.fonts[0].text
 				  })
 			    }
 			  })
 			</script>
 		</div>
 		
-		
-		
 		<script>
 			
-			layui.use(function(){
+			$('.ts').click(function(){
+				layer.open({
+					type: 1
+					,title:false
+					,clonseBtn:false
+					,area:'300px;'
+					,shade:0.8
+					,id:'LAY_layuipro'
+					,btn:['我已阅读并知晓']
+					,btnAligen:'c'
+					,content:'<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">一、客户需在各支行营业网点内完成抽奖，如在营业网点外进行抽奖，抽奖结果无效。<br><br>二、客户需由工作人员协助完成抽奖，如在无工作人员在场情况下，抽奖结果无效。<br><br>三、客户需留存照片、存单、存折等凭证，同时工作人员该隐抽奖标识登记在册。<br><br>四、本次抽奖活动最终解释权归大冶农商行与下辖支行所有。</div>'
+				})
+			})
+			
+			layui.use(['dropdown','layer','util','laydate'], function(){
 			  var layer = layui.layer
 			  ,form = layui.form
-			  ,laypage = layui.laypage
 			  ,element = layui.element
 			  ,laydate = layui.laydate
-			  ,util = layui.util;
+			  ,util = layui.util
+			  ,dropdown = layui.dropdown
+			  ,$ = layui.jquery;
+			  
+			  
+			  
+			 //初演示
+			   dropdown.render({
+			     elem: '#list'
+			     ,data: [{
+			        title: '城区'
+			             ,id: 1
+						 ,isSpreadItem: false
+			             ,type: 'group'
+			             ,child: [{
+			               title: '营业部'
+			               ,id: 10
+			             },
+						 {
+							title: '东风支行'
+							,id: 11 
+						 },{
+							title: '万和支行'
+							,id: 12 
+						 },{
+							title: '东岳支行'
+							,id: 13 
+						 },{
+							title: '城南支行'
+							,id: 14
+						 },{
+							title: '罗桥支行'
+							,id: 15
+						 },{
+							title: '胜利支行'
+							,id: 16
+						 },{
+							title: '和平支行'
+							,id: 17
+						 },{
+							title: '金茂支行'
+							,id: 18
+						 },{
+							title: '高新支行'
+							,id: 19
+						 },{
+							title: '五里牌支行'
+							,id: 20
+						 },
+						],
+					 },{type:'-'},{
+						 title: '乡镇'
+						    ,id: 2
+						 	,isSpreadItem: false
+						    ,type: 'group'
+							,child: [{ title: '金牛支行'
+			               ,id: 21
+			             },
+						 {
+							title: '剧院支行'
+							,id: 22 
+						 },{
+							title: '保安支行'
+							,id: 23 
+						 },{
+							title: '灵乡支行'
+							,id: 24 
+						 },{
+							title: '陈贵支行'
+							,id: 25
+						 },{
+							title: '殷祖支行'
+							,id: 26
+						 },{
+							title: '茗山支行'
+							,id: 27
+						 },{
+							title: '金湖支行'
+							,id: 28
+						 },{
+							title: '金山店支行'
+							,id: 29
+						 },{
+							title: '刘仁八支行'
+							,id: 30
+						 },{
+							title: '还地桥支行'
+							,id: 31,
+						},{
+							title: '铜山口支行'
+							,id: 32
+						},{
+							title: '大箕铺支行'
+							,id: 33
+							},
+							
+							]
+					 }]
+			     ,click: function(obj){
+					this.elem.val(obj.title);
+			     }
+			   });
 			  
 			  //欢迎信息
 			  layer.msg('请仔细阅读规则！！！');
@@ -114,84 +232,11 @@
 			    ,value: new Date()
 			    ,isInitValue: true
 			  });
-		
-			});
 			
-			layui.use('dropdown', function(){
-			  var dropdown = layui.dropdown
-			  dropdown.render({
-			    elem: '#demo1' //可绑定在任意元素中，此处以上述按钮为例
-			    ,data: [{
-			      title: 'menu item 1'
-			      ,id: 100
-			      ,href: '#'
-			    },{
-			      title: 'menu item 2'
-			      ,id: 101
-			      ,href: 'https://' //开启超链接
-			      ,target: '_blank' //新窗口方式打开
-			    },{type: '-'},{
-			      title: 'menu item 3'
-			      ,id: 102
-			      ,type: 'group'  //菜单类型，支持：normal/group/parent/-
-			      ,child: [{
-			        title: 'menu item 3-1'
-			        ,id: 103
-			      },{
-			        title: 'menu item 3-2'
-			        ,id: 104
-			        ,child: [{
-			          title: 'menu item 3-2-1'
-			          ,id: 105
-			        },{
-			          title: 'menu item 3-2-2'
-			          ,id: 106
-			        }]
-			      },{
-			        title: 'menu item 3-3'
-			        ,id: 107
-			      }]
-			    },{type: '-'},{
-			      title: 'menu item 4'
-			      ,id: 108
-			    },{
-			      title: 'menu item 5'
-			      ,id: 109
-			      ,child: [{
-			        title: 'menu item 5-1'
-			        ,id: 11111
-			        ,child: [{
-			          title: 'menu item 5-1-1'
-			          ,id: 2111
-			        },{
-			          title: 'menu item 5-1-2'
-			          ,id: 3111
-			        }]
-			      },{
-			        title: 'menu item 5-2'
-			        ,id: 52
-			      }]
-			    },{type:'-'},{
-			      title: 'menu item 6'
-			      ,id: 6
-			      ,type: 'group'
-			      ,isSpreadItem: false
-			      ,child: [{
-			        title: 'menu item 6-1'
-			        ,id: 61
-			      },{
-			        title: 'menu item 6-2'
-			        ,id: 62
-			      }]
-			    }]
-			    ,id: 'demo1'
-			    //菜单被点击的事件
-			    ,click: function(obj){
-			      console.log(obj);
-			      layer.msg('回调返回的参数已显示再控制台');
-			    }
-			  });
+	
+			 
 			});
+
 		</script>
 		
 		
