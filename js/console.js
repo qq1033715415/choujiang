@@ -1,4 +1,4 @@
-let h = window.innerHeight,w=window.innerWidth;  
+let w=window.innerWidth;  
 
 document.onkeydown = document.onkeyup = document.onkeypress = function(event){
 	let e = event || window.event || arguments.callee.caller.arguments[0];
@@ -13,7 +13,7 @@ function mAlert(){
 }
 
 window.onresize = function () {  
-    if (h != window.innerHeight||w!=window.innerWidth){  
+    if (w!=window.innerWidth){  
         document.body.innerHTML = "禁止操作，请重新刷新网站";
     }  
 }  
