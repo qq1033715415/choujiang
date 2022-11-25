@@ -43,37 +43,86 @@
 			<div class="logo">
 			</div>
 			<script>
+				const teImg = {
+				    src: './img/te.png',
+				    width: '130%',
+				    top: '25%',
+					left:'10%'
+				  }
+				  
+				  const xxImg = {
+				      src: './img/xx.png',
+				      width: '100%',
+				      top: '1%',
+					  left:'10%'
+				    }
+					
+					const yiImg = {
+					    src: './img/yi.png',
+					    width: '110%',
+					    top: '25%',
+					    left:'4%'
+					  }
+					  
+					const erImg = {
+					    src: './img/er.png',
+					    width: '110%',
+					    top: '25%',
+					    left:'4%'
+					  }
+					  
+					const sanImg = {
+					    src: './img/san.png',
+					    width: '110%',
+					    top: '25%',
+					    left:'4%'
+					  }
+					  
+					const canImg = {
+					    src: './img/can.png',
+					    width: '110%',
+					    top: '25%',
+					    left:'4%'
+					  }
+				
 			  const myLucky = new LuckyCanvas.LuckyGrid('#my-lucky', {
 			    width: '280px',
 			    height: '280px',
 			    blocks: [
-			      { padding: '10px', background: '#869cfa' },
-			      { padding: '10px', background: '#e9e8fe' },
+			      { padding: '22px', imgs:[{src:'./img/grid-bg.png',width:'100%',height:'100%'}] },
+			      
 			    ],
 			    prizes: [
-			      { x: 0, y: 0, fonts: [{ text: '0', top: '25%' }], range:1 },
-			      { x: 1, y: 0, fonts: [{ text: '谢谢惠顾', top: '25%', lengthLimit:'50%' }], range:1000000 },
-			      { x: 2, y: 0, fonts: [{ text: '2', top: '25%'}], range:100000 },
-			      { x: 2, y: 1, fonts: [{ text: '3', top: '25%' }], range:10000 },
-			      { x: 2, y: 2, fonts: [{ text: '4', top: '25%' }] },
-			      { x: 1, y: 2, fonts: [{ text: '谢谢惠顾', top: '25%', lengthLimit:'50%' }] },
-			      { x: 0, y: 2, fonts: [{ text: '6', top: '25%' }] },
-			      { x: 0, y: 1, fonts: [{ text: '7', top: '25%' }] },
+			      { x: 0, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[teImg], fonts: [{ text: '特等奖', top: '25%',fontSize:'0'}], range:1 },
+			      { x: 1, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[xxImg], fonts: [{ text: '谢谢惠顾', top: '25%', lengthLimit:'50%',fontSize:'0' }], range:1000000 },
+			      { x: 2, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[canImg], fonts: [{ text: '参与奖', top: '25%',fontSize:'0'}], range:100000 },
+			      { x: 2, y: 1, shadow: '2px 1px 2px #cccccc',imgs:[yiImg], fonts: [{ text: '一等奖', top: '25%' ,fontSize:'0'}], range:10000 },
+			      { x: 2, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[xxImg], fonts: [{ text: '谢谢惠顾', top: '25%',fontSize:'0' }] },
+			      { x: 1, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[sanImg], fonts: [{ text: '三等奖', top: '25%', lengthLimit:'50%',fontSize:'0' }] },
+			      { x: 0, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[erImg], fonts: [{ text: '二等奖', top: '25%',fontSize:'0' }] },
+			      { x: 0, y: 1, shadow: '2px 1px 2px #cccccc',imgs:[canImg], fonts: [{ text: '参与奖', top: '25%',fontSize:'0' }] },
 			    ],
 			    buttons: [{
 			      x: 1, y: 1,
-			      background: '#7f95d1',
-			      fonts: [{ text: '开始', top: '25%' }]
+			      background: '#c34e4d',
+				  imgs:[{
+					  src:'./img/go.png',
+					  width:'100%',
+					  height:'100%'
+				  }],
+			      fonts: [{ text: '开始', top: '25%',fontSize:'0' }]
 			    }],
 			    defaultStyle: {
-			      background: '#b8c5f2',
+			      background: '#F3EFE0',
 			    },
 				defaultConfig:{
-					speed: 10,
+					speed: 7,
+					accelerationTime:200,
+					decelerationTime:200,
+					
 				},
 				activeStyle: {
-				      fontColor: '#f9bdbd',
-				      background: '#9c9cdd'
+				      background: '#fce686'
 				},
 			    start: function() {
 			      // 开始游戏
@@ -242,7 +291,7 @@
 		
 	<script src="./js/hb.js"></script>
 	
-	<!-- <script src="./js/console.js"></script> -->
+	<script src="./js/console.js"></script>
 	
 	</body>
 </html>
