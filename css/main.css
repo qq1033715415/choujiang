@@ -130,6 +130,10 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
 	width: 100px;
 }
 
+.layui-menu li{
+	padding:2px 15px !important;
+}
+
 #list::-webkit-input-placeholder { /* WebKit, Blink, Edge */    color: #FFFFFF; }
 
 #list:-moz-placeholder { /* Mozilla Firefox 4 to 18 */   color: #FFFFFF; }
