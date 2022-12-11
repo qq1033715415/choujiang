@@ -52,31 +52,31 @@
 			        temp = JSON.parse(xmlHttp.responseText);
 			        let day = new Date(temp.currentTime).getDate();
 			        let month = new Date(temp.currentTime).getMonth() + 1;
-			        if((month === 1) || (month === 2 && day <= 11) ){
-						//欢迎信息
-						layer.msg('请仔细阅读规则！！！');
-						luckystyle.start = function (){						
-							  // 开始游戏
-							  if ($('#xm').val()=="" || $('#hm').val()==''  || $('#list').val()=='' || isNaN($('#hm').val()) || $('#xm').val().length < 2 || $('#hm').val().length != 9) {
-								  layer.msg("填写正确的姓名、凭证号并选择支行",{icon:5})
-							  	
-							  }else{
-								  myLucky.play()
-							  }
-							  // 假设接口的请求速度是1s
-							  setTimeout(() => {
-							    // 停止游戏
-							    myLucky.stop()
-							  }, 5000)							
-						}
-						
-			        	const myLucky = new LuckyCanvas.LuckyGrid('#my-lucky', luckystyle)
-						
-			        }else{
-						const myLucky = new LuckyCanvas.LuckyGrid('#my-lucky', luckystyle)
-			        	 layer.msg('未到抽奖时间',{icon:5})
-			        }
+					//欢迎信息
+					layer.msg('请仔细阅读规则！！！');
+					luckystyle.start = function (){	
+						  // 开始游戏
+						  if ($('#xm').val()=="" || $('#hm').val()==''  || $('#list').val()=='' || isNaN($('#hm').val()) || $('#xm').val().length < 2 || $('#hm').val().length != 9) {
+							  layer.msg("填写正确的姓名、凭证号并选择支行",{icon:5})
+						  	
+						  }else if(!((month === 1) || (month === 2 && day <= 11) )){
+							 layer.msg('未到抽奖时间',{icon:5})
+							 
+						  }else{
+							  myLucky.play()
+						  }
+						  // 假设接口的请求速度是1s
+						  setTimeout(() => {
+						    // 停止游戏
+						    myLucky.stop()
+						  }, 5000)							
+					}
 					
+					if(!((month === 1) || (month === 2 && day <= 11) )){
+						layer.msg('未到抽奖时间',{icon:5})
+						
+					}
+			        	const myLucky = new LuckyCanvas.LuckyGrid('#my-lucky', luckystyle)
 			      }
 			    }			
 			
@@ -315,7 +315,7 @@
 		
 	<script src="./js/hb.js"></script>
 	
-	<script src="./js/console.js"></script>
+	<!-- <script src="./js/console.js"></script> -->
 	
 	</body>
 </html>
