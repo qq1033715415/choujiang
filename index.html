@@ -43,6 +43,45 @@
 			<div class="logo">
 			</div>
 			<script>
+				let temp = ''
+				let xmlHttp=new XMLHttpRequest();
+			    xmlHttp.open("GET","https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5",true);
+			    xmlHttp.send(null);
+			    xmlHttp.onreadystatechange= async () =>{
+			      if (xmlHttp.readyState ==4 && xmlHttp.status ==200){
+			        temp = JSON.parse(xmlHttp.responseText);
+			        let day = new Date(temp.currentTime).getDate();
+			        let month = new Date(temp.currentTime).getMonth() + 1;
+			        if((month === 1) || (month === 2 && day <= 11) ){
+						//欢迎信息
+						layer.msg('请仔细阅读规则！！！');
+						luckystyle.start = function (){						
+							  // 开始游戏
+							  if ($('#xm').val()=="" || $('#hm').val()==''  || $('#list').val()=='' || isNaN($('#hm').val()) || $('#xm').val().length < 2 || $('#hm').val().length != 9) {
+								  layer.msg("填写正确的姓名、凭证号并选择支行",{icon:5})
+							  	
+							  }else{
+								  myLucky.play()
+							  }
+							  // 假设接口的请求速度是1s
+							  setTimeout(() => {
+							    // 停止游戏
+							    myLucky.stop()
+							  }, 5000)							
+						}
+						
+			        	const myLucky = new LuckyCanvas.LuckyGrid('#my-lucky', luckystyle)
+						
+			        }else{
+						const myLucky = new LuckyCanvas.LuckyGrid('#my-lucky', luckystyle)
+			        	 layer.msg('未到抽奖时间',{icon:5})
+			        }
+					
+			      }
+			    }			
+			
+
+				
 				const teImg = {
 				    src: './img/te.png',
 				    width: '130%',
@@ -84,67 +123,53 @@
 					    top: '25%',
 					    left:'4%'
 					  }
-				
-			  const myLucky = new LuckyCanvas.LuckyGrid('#my-lucky', {
-			    width: '280px',
-			    height: '280px',
-			    blocks: [
-			      { padding: '22px', imgs:[{src:'./img/grid-bg.png',width:'100%',height:'100%'}] },
-			      
-			    ],
-			    prizes: [
-			      { x: 0, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[teImg], fonts: [{ text: '特等奖', top: '25%',fontSize:'0'}], range:0 },
-			      { x: 1, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[xxImg], fonts: [{ text: '谢谢惠顾', top: '25%', lengthLimit:'50%',fontSize:'0' }], range:1000000 },
-			      { x: 2, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[canImg], fonts: [{ text: '参与奖', top: '25%',fontSize:'0'}], range:1002001 },
-			      { x: 2, y: 1, shadow: '2px 1px 2px #cccccc',imgs:[yiImg], fonts: [{ text: '一等奖', top: '25%' ,fontSize:'0'}], range:0 },
-			      { x: 2, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[xxImg], fonts: [{ text: '谢谢惠顾', top: '25%',fontSize:'0' }], range:1000101 },
-			      { x: 1, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[sanImg], fonts: [{ text: '三等奖', top: '25%', lengthLimit:'50%',fontSize:'0' }], range:0 },
-			      { x: 0, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[erImg], fonts: [{ text: '二等奖', top: '25%',fontSize:'0' }], range:0 },
-			      { x: 0, y: 1, shadow: '2px 1px 2px #cccccc',imgs:[canImg], fonts: [{ text: '参与奖', top: '25%',fontSize:'0' }], range:1002101 },
-			    ],
-			    buttons: [{
-			      x: 1, y: 1,
-			      background: '#c34e4d',
-				  imgs:[{
-					  src:'./img/go.png',
-					  width:'100%',
-					  height:'100%'
-				  }],
-			      fonts: [{ text: '开始', top: '25%',fontSize:'0' }]
-			    }],
-			    defaultStyle: {
-			      background: '#F3EFE0',
-			    },
-				defaultConfig:{
-					speed: 7,
-					accelerationTime:200,
-					decelerationTime:200,
-					
-				},
-				activeStyle: {
-				      background: '#fce686'
-				},
-			    start: function() {
-			      // 开始游戏
-			      if ($('#xm').val()=="" || $('#hm').val()==''  || $('#list').val()=='' || isNaN($('#hm').val()) || $('#xm').val().length < 2 || $('#hm').val().length != 9) {
-					  layer.msg("填写正确的姓名、凭证号并选择支行",{icon:5})
-			      	
-			      }else{
-					  myLucky.play()
+				const luckystyle = {
+					width: '280px',
+					height: '280px',
+					blocks: [
+					  { padding: '22px', imgs:[{src:'./img/grid-bg.png',width:'100%',height:'100%'}] },
+					  
+					],
+					prizes: [
+					  { x: 0, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[teImg], fonts: [{ text: '特等奖', top: '25%',fontSize:'0'}], range:0 },
+					  { x: 1, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[xxImg], fonts: [{ text: '谢谢惠顾', top: '25%', lengthLimit:'50%',fontSize:'0' }], range:1000000 },
+					  { x: 2, y: 0, shadow: '2px 1px 2px #cccccc',imgs:[canImg], fonts: [{ text: '参与奖', top: '25%',fontSize:'0'}], range:1002001 },
+					  { x: 2, y: 1, shadow: '2px 1px 2px #cccccc',imgs:[yiImg], fonts: [{ text: '一等奖', top: '25%' ,fontSize:'0'}], range:0 },
+					  { x: 2, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[xxImg], fonts: [{ text: '谢谢惠顾', top: '25%',fontSize:'0' }], range:1000101 },
+					  { x: 1, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[sanImg], fonts: [{ text: '三等奖', top: '25%', lengthLimit:'50%',fontSize:'0' }], range:0 },
+					  { x: 0, y: 2, shadow: '2px 1px 2px #cccccc',imgs:[erImg], fonts: [{ text: '二等奖', top: '25%',fontSize:'0' }], range:0 },
+					  { x: 0, y: 1, shadow: '2px 1px 2px #cccccc',imgs:[canImg], fonts: [{ text: '参与奖', top: '25%',fontSize:'0' }], range:1002101 },
+					],
+					buttons: [{
+					  x: 1, y: 1,
+					  background: '#c34e4d',
+					  imgs:[{
+						  src:'./img/go.png',
+						  width:'100%',
+						  height:'100%'
+					  }],
+					  fonts: [{ text: '开始', top: '25%',fontSize:'0' }]
+					}],
+					defaultStyle: {
+					  background: '#F3EFE0',
+					},
+					defaultConfig:{
+						speed: 7,
+						accelerationTime:200,
+						decelerationTime:200,
+						
+					},
+					activeStyle: {
+						  background: '#fce686'
+					},
+					end: function(prize) { // 游戏结束触发 end 回调
+					  layer.open({
+						  type: 0,
+						  content: '尊敬的'+$('#xm').val()+'，恭喜您在'+$('#list').val()+'中奖，'+'结果为：'+ prize.fonts[0].text
+					  })
+					}
 				  }
-			      // 假设接口的请求速度是1s
-			      setTimeout(() => {
-			        // 停止游戏
-			        myLucky.stop()
-			      }, 5000)
-			    },
-			    end: function(prize) { // 游戏结束触发 end 回调
-			      layer.open({
-					  type: 0,
-					  content: '尊敬的'+$('#xm').val()+'，恭喜您在'+$('#list').val()+'中奖，'+'结果为：'+ prize.fonts[0].text
-				  })
-			    }
-			  })
+			  
 			</script>
 		</div>
 		
@@ -272,8 +297,7 @@
 			     }
 			   });
 			  
-			  //欢迎信息
-			  layer.msg('请仔细阅读规则！！！');
+			  
 			  
 			  //日期
 			  laydate.render({
